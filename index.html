@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meenal & Avinash — Wedding Invitation | ShadiCards</title>
+<meta property="og:title" content="Meenal & Avinash — You're Invited 💍">
+<meta property="og:description" content="Tap to open our wedding invitation.">
+<meta property="og:image" content="https://picsum.photos/seed/meenal-avinash-hero/1200/630">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marcellus&family=Mukta:wght@300;400;500&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --maroon:#7d1430;--maroon-deep:#3d0a18;--paper:#fcf7ef;--paper2:#f4e9d6;--ink:#2c0a12;
+    --gold:#c69749;--gold-bright:#e9c06a;--marigold:#ef9d10;--soft:#7a6a5f;
+    --display:'Rozha One',serif;--serif:'Cormorant Garamond',serif;--label:'Marcellus',serif;
+    --body:'Mukta',system-ui,sans-serif;--deva:'Tiro Devanagari Hindi',serif;--stage:480px;
+  }
+  html{scroll-behavior:smooth}
+  body{background:radial-gradient(60% 50% at 50% 0%,#5a0f22,transparent 70%),#240810;color:var(--ink);
+    font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+  body.locked{overflow:hidden;height:100vh}
+  ::selection{background:var(--marigold);color:#2c0a12}
+
+  @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes pulseRing{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.7);opacity:0}}
+  @keyframes petalFall{0%{transform:translateY(-8vh) rotate(0);opacity:0}10%{opacity:.85}100%{transform:translateY(110vh) rotate(440deg);opacity:0}}
+  @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+
+  [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+  [data-reveal].in{opacity:1;transform:none}
+
+  /* full-width on every screen; each section centers its own content */
+  .stage{position:relative;width:100%}
+  .wrap{width:100%;max-width:560px;margin:0 auto}
+
+  /* ─────────── ENVELOPE ─────────── */
+  #cover{position:fixed;inset:0;z-index:120;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;
+    background:radial-gradient(115% 75% at 50% 6%,#45101f,#240810 55%,#160509);transition:opacity .85s ease,visibility .85s;cursor:pointer;padding:40px 24px}
+  #cover.opened{opacity:0;visibility:hidden;pointer-events:none}
+  .env{position:relative;width:min(360px,84vw);aspect-ratio:7/5;filter:drop-shadow(0 34px 64px rgba(0,0,0,.7))}
+  .env-body{position:absolute;inset:0;border-radius:10px;overflow:hidden;background:linear-gradient(160deg,#ab2342,#88162f 58%,#6d1029);box-shadow:inset 0 0 0 1px rgba(233,192,106,.45),inset 0 0 60px rgba(0,0,0,.22)}
+  .env-body::before{content:"";position:absolute;inset:0;opacity:.18;mix-blend-mode:overlay;background-size:130px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><g fill='none' stroke='%23fff' stroke-width='1.3'><path d='M30 44 q14 -20 30 -2 q-16 7 -30 2z'/><circle cx='33' cy='42' r='2.4'/><path d='M110 30 q18 5 11 26 q-16 -5 -11 -26z'/><path d='M120 110 q-20 5 -15 27 q19 -3 15 -27z'/><circle cx='90' cy='92' r='3'/></g></svg>")}
+  .env-frame{position:absolute;inset:12px;border:1px solid rgba(233,192,106,.5);border-radius:6px}
+  .flap{position:absolute;left:0;right:0}
+  .flap-bottom{top:0;bottom:0;background:linear-gradient(180deg,transparent 48%,rgba(0,0,0,.16) 50%);clip-path:polygon(0 100%,100% 100%,50% 46%)}
+  .flap-left{top:0;bottom:0;width:55%;background:linear-gradient(90deg,rgba(0,0,0,.1),transparent);clip-path:polygon(0 0,0 100%,100% 50%)}
+  .flap-right{top:0;bottom:0;right:0;left:auto;width:55%;background:linear-gradient(270deg,rgba(0,0,0,.1),transparent);clip-path:polygon(100% 0,100% 100%,0 50%)}
+  .flap-top{top:0;bottom:0;transform-origin:top center;z-index:4;background:linear-gradient(160deg,#8c1838,#6a1029);clip-path:polygon(0 0,100% 0,50% 56%);transition:transform 1s cubic-bezier(.7,0,.3,1)}
+  #cover.opened .flap-top{transform:rotateX(176deg)}
+  .env-glow{position:absolute;left:50%;top:46%;width:70%;height:70%;transform:translate(-50%,-50%) scale(.2);background:radial-gradient(circle,var(--gold-bright),transparent 62%);opacity:0;z-index:2;border-radius:50%;transition:opacity .9s ease .2s,transform 1.1s ease .2s}
+  #cover.opened .env-glow{opacity:.85;transform:translate(-50%,-50%) scale(1.5)}
+  .seal{position:absolute;left:50%;top:50%;margin:-43px 0 0 -43px;width:86px;height:86px;border-radius:50%;z-index:6;transform-origin:center;
+    background:radial-gradient(circle at 38% 32%,#fffaf0,#efe6d4 58%,#d3c4a8);box-shadow:0 8px 20px rgba(0,0,0,.45),inset 0 -4px 8px rgba(120,90,40,.35),inset 0 3px 6px rgba(255,255,255,.75);display:grid;place-items:center;transition:opacity .5s,transform .6s}
+  .seal::after{content:"";position:absolute;inset:6px;border-radius:50%;border:1.5px dashed rgba(125,20,48,.45)}
+  #cover.opened .seal{opacity:0;transform:scale(.4)}
+  .seal-mono{font-family:var(--display);font-size:26px;color:var(--maroon)}
+  .cover-text{text-align:center;color:var(--paper);animation:fadeUp 1s cubic-bezier(.16,1,.3,1) both}
+  .cover-eyebrow{font-family:var(--label);font-size:11px;letter-spacing:.4em;text-transform:uppercase;opacity:.78;margin-bottom:16px}
+  .cover-couple{font-family:var(--display);font-size:clamp(30px,8vw,42px);margin-bottom:14px}
+  .cover-tap{font-family:var(--serif);font-style:italic;font-size:18px;opacity:.9;display:inline-flex;align-items:center;gap:9px}
+  .cover-tap .dot{width:7px;height:7px;border-radius:50%;background:var(--gold-bright);animation:pulseRing 1.8s ease-out infinite}
+
+  /* ─────────── VIDEO STAGE (autoplay on tap) ─────────── */
+  #videostage{position:fixed;inset:0;z-index:110;background:#000;display:none;opacity:0;transition:opacity .6s ease}
+  #videostage.show{display:block;opacity:1}
+  #videostage.fading{opacity:0}
+  #introvideo{width:100%;height:100%;object-fit:cover}
+  .vskip{position:absolute;bottom:22px;right:18px;z-index:2;font-family:var(--label);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:rgba(255,255,255,.85);background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.35);border-radius:30px;padding:8px 16px;cursor:pointer;backdrop-filter:blur(6px)}
+  .vsound{position:absolute;top:18px;right:18px;z-index:2;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.35);color:#fff;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(6px)}
+
+  /* ─────────── NAMES (auto after video) ─────────── */
+  #names{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    background:radial-gradient(80% 60% at 50% 42%,#5e1330,#330a1a 60%,#220610);color:var(--paper);overflow:hidden;padding:90px 24px}
+  .hero-mandala{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(680px,118vw);aspect-ratio:1;color:var(--gold-bright);opacity:.12;z-index:0;pointer-events:none;animation:spinSlow 140s linear infinite}
+  @keyframes spinSlow{to{transform:translate(-50%,-50%) rotate(360deg)}}
+  .hero-vignette{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(60% 45% at 50% 44%,rgba(40,8,18,.55),transparent 70%)}
+  .hero-inner{position:relative;z-index:2}
+  .names-eyebrow{font-family:var(--label);font-size:11px;letter-spacing:.45em;text-transform:uppercase;color:var(--gold-bright)}
+  .names-big{font-family:var(--display);font-size:clamp(48px,16vw,76px);line-height:1.04;margin:12px 0;
+    background:linear-gradient(110deg,#f4e3bf,#e9c06a 40%,#fff5dd 60%,#d9a94e);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:shimmer 7s linear infinite}
+  .names-amp{display:block;font-family:var(--serif);font-style:italic;font-size:.4em;-webkit-text-fill-color:var(--gold);color:var(--gold);margin:4px 0}
+  .names-sub{font-family:var(--serif);font-style:italic;font-size:18px;opacity:.9}
+  [data-hero]{opacity:0;transform:translateY(30px)}
+  #names.go [data-hero]{animation:fadeUp 1s cubic-bezier(.16,1,.3,1) both}
+  #names.go [data-hero]:nth-child(2){animation-delay:.18s}
+  #names.go [data-hero]:nth-child(3){animation-delay:.36s}
+  #names.go [data-hero]:nth-child(4){animation-delay:.54s}
+  .scroll-cue{position:absolute;bottom:84px;left:50%;transform:translateX(-50%);color:var(--gold-bright);font-family:var(--label);font-size:10px;letter-spacing:.3em;text-transform:uppercase;opacity:0;transition:opacity .6s ease 1s}
+  #names.go .scroll-cue{opacity:.85}
+  .scroll-cue span{display:block;margin:8px auto 0;width:1px;height:24px;background:linear-gradient(var(--gold-bright),transparent);animation:floatY 2s ease-in-out infinite}
+
+  /* ─────────── INVITE CARD (matches the liked design) ─────────── */
+  /* maroon backdrop + centered ivory card → looks intentional on desktop, framed on mobile */
+  #invite{background:radial-gradient(120% 85% at 50% 0,#52102a,#2c0712);position:relative;overflow:hidden;display:flex;justify-content:center;padding:60px 22px}
+  .frame{position:relative;width:100%;max-width:520px;padding:64px 30px;background:linear-gradient(180deg,var(--paper),var(--paper2));border-radius:8px;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+  .frame-edge{position:absolute;inset:16px;border:1px solid rgba(198,151,73,.55)}
+  .frame-edge::before{content:"";position:absolute;inset:6px;border:1px solid rgba(198,151,73,.3)}
+  .corner{position:absolute;width:30px;height:30px;color:var(--gold)}
+  .corner.tl{top:22px;left:22px}.corner.tr{top:22px;right:22px;transform:scaleX(-1)}
+  .corner.bl{bottom:22px;left:22px;transform:scaleY(-1)}.corner.br{bottom:22px;right:22px;transform:scale(-1)}
+  .kalash{width:54px;height:54px;margin:0 auto 18px;color:var(--maroon);display:block}
+  .shloka{font-family:var(--deva);font-size:16px;line-height:2.05;color:var(--maroon);text-align:center;margin-bottom:22px}
+  .blessing{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--soft);text-align:center;margin-bottom:26px;line-height:1.7}
+  .names-card{text-align:center}
+  .names-card .n{font-family:var(--display);font-size:clamp(46px,15vw,64px);line-height:1.08;color:var(--maroon)}
+  .names-card .amp{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--gold);margin:4px 0}
+  .parents{text-align:center;font-family:var(--serif);font-size:16px;color:var(--soft);margin-top:24px;line-height:1.8}
+
+  /* ─────────── HORIZONTAL SCROLL PANORAMA ─────────── */
+  #pano{position:relative;height:340vh}
+  .pano-sticky{position:sticky;top:0;height:100vh;overflow:hidden}
+  .pano-track{position:absolute;top:0;left:0;height:100%;display:flex;will-change:transform}
+  .panel{position:relative;width:100vw;height:100%;flex:0 0 auto;display:flex;flex-direction:column;justify-content:center;
+    padding:80px max(28px,calc((100vw - 520px)/2)) 120px}
+  .panel-1{background:linear-gradient(160deg,#4d0c1d,#3d0a18);color:var(--paper)}
+  .panel-2{background:linear-gradient(160deg,#5a1228,#3d0a18);color:var(--paper)}
+  .panel-3{background:linear-gradient(160deg,#46101f,#2c0712);color:var(--paper)}
+  .panel .ptitle{font-family:var(--display);font-size:clamp(34px,10vw,46px);color:var(--gold-bright);margin-bottom:6px}
+  .panel .peyebrow{font-family:var(--label);font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:rgba(252,247,239,.6);margin-bottom:14px}
+  .evt{display:flex;align-items:baseline;gap:14px;padding:16px 0;border-bottom:1px solid rgba(233,192,106,.22)}
+  .evt .e-day{font-family:var(--display);font-size:22px;color:var(--gold-bright);min-width:84px}
+  .evt .e-name{font-family:var(--serif);font-size:21px}
+  .evt .e-meta{font-family:var(--body);font-size:13px;opacity:.7;margin-top:2px}
+  .gal{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+  .gal img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;border:3px solid rgba(255,255,255,.85)}
+  .gal img:first-child{grid-column:1/3;aspect-ratio:16/10}
+  .venue-card{text-align:center}
+  .venue-card .vname{font-family:var(--display);font-size:28px;color:var(--paper);margin:8px 0 4px}
+  .venue-card .vaddr{font-family:var(--serif);font-style:italic;font-size:17px;opacity:.85;margin-bottom:22px}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--label);font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+    background:linear-gradient(120deg,var(--gold),var(--gold-bright));color:#3d0a18;border:none;border-radius:34px;padding:13px 24px;cursor:pointer;text-decoration:none;box-shadow:0 10px 24px rgba(198,151,73,.3)}
+  .pano-progress{position:absolute;bottom:78px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:5}
+  .pano-progress i{width:7px;height:7px;border-radius:50%;background:rgba(233,192,106,.35);transition:.3s}
+  .pano-progress i.on{background:var(--gold-bright);width:22px;border-radius:4px}
+  .pano-hint{position:absolute;top:22px;left:50%;transform:translateX(-50%);font-family:var(--label);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(233,192,106,.7);z-index:5}
+
+  /* ─────────── CLOSING ─────────── */
+  #closing{background:linear-gradient(180deg,#2c0712,var(--maroon));color:var(--paper);text-align:center;padding:90px 26px 130px}
+  #closing .venue{font-family:var(--display);font-size:26px;color:var(--gold-bright);margin:6px 0}
+  #closing .tag{font-family:var(--serif);font-style:italic;font-size:20px;opacity:.92}
+  .credit{font-family:var(--label);font-size:10px;letter-spacing:.3em;text-transform:uppercase;opacity:.55;margin-top:40px}
+
+  /* ─────────── QUICK BUTTONS BAR ─────────── */
+  #quickbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:80;width:100%;
+    display:none;justify-content:space-around;align-items:center;gap:6px;padding:10px 10px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(33,7,14,.88);backdrop-filter:blur(12px);border-top:1px solid rgba(233,192,106,.28)}
+  @media(min-width:560px){#quickbar{bottom:24px;width:auto;min-width:440px;gap:14px;border:1px solid rgba(233,192,106,.3);border-radius:46px;padding:12px 26px;box-shadow:0 16px 40px rgba(0,0,0,.45)}}
+  #quickbar.show{display:flex}
+  .qbtn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;color:var(--gold-bright);
+    font-family:var(--label);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:6px 2px;border-radius:12px;transition:.25s}
+  .qbtn:hover{color:#fff;background:rgba(233,192,106,.1)}
+  .qbtn svg{width:22px;height:22px}
+
+  #petals{position:fixed;inset:0;pointer-events:none;z-index:60;overflow:hidden;display:none}
+  #petals.show{display:block}
+  #petals i{position:absolute;top:0;width:11px;height:15px;border-radius:50% 50% 50% 0;opacity:.7;animation:petalFall linear infinite}
+  @media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.25s!important}}
+</style>
+</head>
+<body class="locked">
+
+<!-- ENVELOPE -->
+<div id="cover" role="button" tabindex="0" aria-label="Tap to open invitation">
+  <div class="env">
+    <div class="env-body"></div><div class="env-glow"></div>
+    <div class="flap flap-left"></div><div class="flap flap-right"></div><div class="flap flap-bottom"></div>
+    <div class="env-frame"></div><div class="flap flap-top"></div>
+    <div class="seal"><span class="seal-mono">M&amp;A</span></div>
+  </div>
+  <div class="cover-text">
+    <div class="cover-eyebrow">Together with their families</div>
+    <div class="cover-couple">Meenal &amp; Avinash</div>
+    <div class="cover-tap"><span class="dot"></span>Tap to open</div>
+  </div>
+</div>
+
+<!-- VIDEO STAGE -->
+<div id="videostage">
+  <video id="introvideo" playsinline preload="auto" src="lifafa-media/intro.mp4"></video>
+  <button class="vsound" id="vsound" aria-label="Toggle sound">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+  </button>
+  <button class="vskip" id="vskip">Skip ▸</button>
+</div>
+
+<!-- PETALS + QUICKBAR -->
+<div id="petals" aria-hidden="true"></div>
+<nav id="quickbar" aria-label="Quick links">
+  <button class="qbtn" data-go="events"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Events</button>
+  <button class="qbtn" data-go="gallery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>Gallery</button>
+  <button class="qbtn" data-go="call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Call</button>
+  <button class="qbtn" data-map><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>Directions</button>
+</nav>
+
+<div class="stage">
+<main>
+  <!-- NAMES -->
+  <section id="names">
+    <svg class="hero-mandala" viewBox="0 0 400 400" aria-hidden="true">
+      <defs><path id="ptl" d="M200 44 q22 46 0 100 q-22 -54 0 -100z"/><path id="ptl2" d="M200 96 q12 30 0 64 q-12 -34 0 -64z"/></defs>
+      <g fill="none" stroke="currentColor" stroke-width="1">
+        <circle cx="200" cy="200" r="194"/><circle cx="200" cy="200" r="178" stroke-dasharray="2 8"/>
+        <circle cx="200" cy="200" r="150"/><circle cx="200" cy="200" r="86"/><circle cx="200" cy="200" r="66" stroke-dasharray="3 7"/>
+      </g>
+      <g fill="currentColor" opacity=".55">
+        <use href="#ptl"/><use href="#ptl" transform="rotate(30 200 200)"/><use href="#ptl" transform="rotate(60 200 200)"/><use href="#ptl" transform="rotate(90 200 200)"/><use href="#ptl" transform="rotate(120 200 200)"/><use href="#ptl" transform="rotate(150 200 200)"/><use href="#ptl" transform="rotate(180 200 200)"/><use href="#ptl" transform="rotate(210 200 200)"/><use href="#ptl" transform="rotate(240 200 200)"/><use href="#ptl" transform="rotate(270 200 200)"/><use href="#ptl" transform="rotate(300 200 200)"/><use href="#ptl" transform="rotate(330 200 200)"/>
+      </g>
+      <g fill="currentColor" opacity=".7">
+        <use href="#ptl2" transform="rotate(15 200 200)"/><use href="#ptl2" transform="rotate(45 200 200)"/><use href="#ptl2" transform="rotate(75 200 200)"/><use href="#ptl2" transform="rotate(105 200 200)"/><use href="#ptl2" transform="rotate(135 200 200)"/><use href="#ptl2" transform="rotate(165 200 200)"/><use href="#ptl2" transform="rotate(195 200 200)"/><use href="#ptl2" transform="rotate(225 200 200)"/><use href="#ptl2" transform="rotate(255 200 200)"/><use href="#ptl2" transform="rotate(285 200 200)"/><use href="#ptl2" transform="rotate(315 200 200)"/><use href="#ptl2" transform="rotate(345 200 200)"/>
+      </g>
+    </svg>
+    <div class="hero-vignette"></div>
+    <div class="hero-inner">
+      <div class="names-eyebrow" data-hero>The wedding of</div>
+      <div class="names-big" data-hero>Meenal<span class="names-amp">&amp;</span>Avinash</div>
+      <div class="names-sub" data-hero>A new beginning, blessed by tradition</div>
+    </div>
+    <div class="scroll-cue">Scroll<span></span></div>
+  </section>
+
+  <!-- INVITE CARD -->
+  <section id="invite">
+    <div class="frame">
+      <div class="frame-edge"></div>
+      <svg class="corner tl" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 14C2 7 7 2 14 2M2 9C2 5 5 2 9 2"/><circle cx="4" cy="4" r="1.4" fill="currentColor"/></svg>
+      <svg class="corner tr" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 14C2 7 7 2 14 2M2 9C2 5 5 2 9 2"/><circle cx="4" cy="4" r="1.4" fill="currentColor"/></svg>
+      <svg class="corner bl" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 14C2 7 7 2 14 2M2 9C2 5 5 2 9 2"/><circle cx="4" cy="4" r="1.4" fill="currentColor"/></svg>
+      <svg class="corner br" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 14C2 7 7 2 14 2M2 9C2 5 5 2 9 2"/><circle cx="4" cy="4" r="1.4" fill="currentColor"/></svg>
+
+      <svg class="kalash" data-reveal viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="24" cy="8" r="3.2"/><path d="M24 11v5"/>
+        <path d="M16 16h16l-2 7c-1 3.5-3 5.5-6 5.5s-5-2-6-5.5z"/>
+        <path d="M14 28h20l-2.5 12h-15z"/><path d="M19 40h10"/>
+      </svg>
+      <p class="shloka" data-reveal>॥ श्री गणेशाय नमः ॥<br>वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ<br>निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥</p>
+      <p class="blessing" data-reveal>With the blessings of Shri Ganesh and our beloved families, we joyfully invite you to celebrate the union of</p>
+      <div class="names-card">
+        <div class="n" data-reveal>Meenal</div>
+        <div class="amp" data-reveal>&amp;</div>
+        <div class="n" data-reveal>Avinash</div>
+      </div>
+      <p class="parents" data-reveal>Daughter of Mr. &amp; Mrs. Sharma<br>Son of Mr. &amp; Mrs. Patel</p>
+    </div>
+  </section>
+
+  <!-- HORIZONTAL PANORAMA -->
+  <section id="pano">
+    <div class="pano-sticky">
+      <div class="pano-hint">⟶ keep scrolling</div>
+      <div class="pano-track" id="pano-track">
+        <!-- Panel 1: Events -->
+        <div class="panel panel-1" data-panel="events">
+          <div class="peyebrow">The Celebrations</div>
+          <div class="ptitle">Events</div>
+          <div style="margin-top:10px">
+            <div class="evt"><div class="e-day">29 Jun</div><div><div class="e-name">Mehendi</div><div class="e-meta">4:00 PM · Garden Lawn</div></div></div>
+            <div class="evt"><div class="e-day">30 Jun</div><div><div class="e-name">Sangeet</div><div class="e-meta">7:00 PM · Crystal Ballroom</div></div></div>
+            <div class="evt"><div class="e-day">01 Jul</div><div><div class="e-name">Wedding</div><div class="e-meta">7:00 PM · The Leela Palace</div></div></div>
+            <div class="evt"><div class="e-day">02 Jul</div><div><div class="e-name">Reception</div><div class="e-meta">8:00 PM · Royal Terrace</div></div></div>
+          </div>
+        </div>
+        <!-- Panel 2: Gallery -->
+        <div class="panel panel-2" data-panel="gallery">
+          <div class="peyebrow">Our Story</div>
+          <div class="ptitle">Gallery</div>
+          <div class="gal">
+            <img loading="lazy" src="https://picsum.photos/seed/g-hero/600/400" alt="">
+            <img loading="lazy" src="https://picsum.photos/seed/g-1/400/520" alt="">
+            <img loading="lazy" src="https://picsum.photos/seed/g-2/400/520" alt="">
+          </div>
+        </div>
+        <!-- Panel 3: Venue / Call -->
+        <div class="panel panel-3" data-panel="call">
+          <div class="venue-card">
+            <div class="peyebrow">Join Us At</div>
+            <div class="ptitle">The Venue</div>
+            <div class="vname">The Leela Palace</div>
+            <div class="vaddr">Jaipur, Rajasthan · 1 July 2026</div>
+            <a class="btn" href="tel:+919999999999" style="margin:6px 6px">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Call Us
+            </a>
+            <a class="btn" href="https://maps.google.com/?q=The+Leela+Palace+Jaipur" target="_blank" rel="noopener" style="margin:6px 6px;background:none;border:1px solid var(--gold);color:var(--gold-bright);box-shadow:none">Map</a>
+          </div>
+        </div>
+      </div>
+      <div class="pano-progress" id="pano-progress"><i class="on"></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <section id="closing">
+    <p class="tag" data-reveal>We can't wait to celebrate with you</p>
+    <p class="venue" data-reveal>The Leela Palace, Jaipur</p>
+    <p class="parents" data-reveal style="color:rgba(252,247,239,.7)">1st July 2026 · 7:00 PM onwards</p>
+    <p class="credit" data-reveal>Made with ShadiCards · Lifafa</p>
+  </section>
+</main>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  if('scrollRestoration' in history) history.scrollRestoration='manual';
+  window.scrollTo(0,0);
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  var cover=document.getElementById('cover');
+  var vstage=document.getElementById('videostage');
+  var video=document.getElementById('introvideo');
+  var names=document.getElementById('names');
+  var quickbar=document.getElementById('quickbar');
+  var revealed=false;
+
+  /* ── STATE MACHINE: SEALED → PLAYING → REVEALED ── */
+  function openEnvelope(){
+    if(cover.classList.contains('opened')) return;
+    cover.classList.add('opened');
+    setTimeout(function(){ cover.style.display='none'; },900);
+    // start the video (with sound — tap is the user gesture that unlocks audio)
+    vstage.classList.add('show');
+    video.muted=false; video.volume=1;
+    var p=video.play();
+    if(p && p.catch) p.catch(function(){
+      // if audio autoplay still blocked, retry muted so motion at least plays
+      video.muted=true; video.play().catch(function(){ endVideo(); });
+    });
+  }
+  cover.addEventListener('click',openEnvelope);
+  cover.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();openEnvelope();} });
+
+  function endVideo(){
+    if(revealed) return; revealed=true;
+    vstage.classList.add('fading');
+    try{ video.pause(); }catch(e){}
+    setTimeout(function(){ vstage.style.display='none'; },650);
+    // unlock scroll, reveal names automatically, show petals + quickbar
+    document.body.classList.remove('locked');
+    window.scrollTo(0,0);
+    names.classList.add('go');
+    document.getElementById('petals').classList.add('show');
+    quickbar.classList.add('show');
+  }
+  video.addEventListener('ended',endVideo);
+  document.getElementById('vskip').addEventListener('click',endVideo);
+
+  /* sound toggle during video */
+  var vsound=document.getElementById('vsound');
+  vsound.addEventListener('click',function(e){
+    e.stopPropagation();
+    video.muted=!video.muted;
+    vsound.style.opacity=video.muted?.5:1;
+  });
+
+  /* ── PETALS ── */
+  (function(){
+    var box=document.getElementById('petals'), colors=['#ef9d10','#c69749','#e9c06a','#d98a9a','#f0b8c4'];
+    var n=innerWidth<600?12:18, h='';
+    for(var i=0;i<n;i++) h+='<i style="left:'+(Math.random()*100).toFixed(1)+'%;background:'+colors[i%colors.length]
+      +';animation-duration:'+(8+Math.random()*8).toFixed(1)+'s;animation-delay:'+(Math.random()*10).toFixed(1)
+      +'s;transform:scale('+(0.7+Math.random()*0.8).toFixed(2)+')"></i>';
+    box.innerHTML=h;
+  })();
+
+  /* ── REVEAL ON SCROLL ── */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('[data-reveal]').forEach(function(el,i){el.style.transitionDelay=(Math.min(i,4)*0.06)+'s';io.observe(el);});
+
+  /* ── HORIZONTAL PANORAMA (vertical scroll → horizontal move) ── */
+  var pano=document.getElementById('pano'), track=document.getElementById('pano-track');
+  var sticky=pano.querySelector('.pano-sticky'), dots=document.querySelectorAll('#pano-progress i');
+  var panels=track.querySelectorAll('.panel');
+  function panoUpdate(){
+    var r=pano.getBoundingClientRect(), total=pano.offsetHeight-window.innerHeight;
+    var prog=Math.min(1,Math.max(0,(-r.top)/total));
+    var maxX=track.scrollWidth - sticky.offsetWidth;
+    track.style.transform='translateX('+(-prog*maxX).toFixed(1)+'px)';
+    var active=Math.round(prog*(panels.length-1));
+    dots.forEach(function(d,i){ d.classList.toggle('on',i===active); });
+  }
+  var ticking=false;
+  addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(function(){ panoUpdate(); ticking=false; }); } },{passive:true});
+  addEventListener('resize',panoUpdate); panoUpdate();
+
+  /* ── QUICK BUTTONS ── */
+  function panelIndex(key){ for(var i=0;i<panels.length;i++) if(panels[i].getAttribute('data-panel')===key) return i; return 0; }
+  function goToPanel(key){
+    var i=panelIndex(key), total=pano.offsetHeight-window.innerHeight;
+    var prog=panels.length>1 ? i/(panels.length-1) : 0;
+    // small bias so the target panel is fully in view
+    var y=pano.offsetTop + prog*total + (prog>0?2:0);
+    window.scrollTo({top:Math.round(y), behavior:'smooth'});
+  }
+  var MAPS_URL='https://maps.google.com/?q=The+Leela+Palace+Jaipur';
+  quickbar.querySelectorAll('.qbtn').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(b.hasAttribute('data-map')){ window.open(MAPS_URL,'_blank','noopener'); return; }
+      goToPanel(b.getAttribute('data-go'));
+    });
+  });
+})();
+</script>
+</body>
+</html>
