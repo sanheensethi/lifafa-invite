@@ -77,9 +77,14 @@
   /* ─────────── NAMES (auto after video) ─────────── */
   #names{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
     background:radial-gradient(80% 60% at 50% 42%,#5e1330,#330a1a 60%,#220610);color:var(--paper);overflow:hidden;padding:90px 24px}
-  .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;background:url('lifafa-media/mandala.webp') center/cover no-repeat;opacity:.6}
+  .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;background:url('lifafa-media/mandala.webp') center/cover no-repeat;opacity:.6;
+    transform:translate(calc(var(--px,0)*18px),calc(var(--py,0)*18px)) scale(1.16);transition:transform .25s ease-out}
   .hero-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(72% 56% at 50% 46%,rgba(28,6,13,.66),rgba(28,6,13,.32) 68%,rgba(28,6,13,.82))}
-  .hero-inner{position:relative;z-index:2}
+  .hero-inner{position:relative;z-index:2;transform:translate(calc(var(--px,0)*-7px),calc(var(--py,0)*-7px));transition:transform .25s ease-out}
+  /* liveliness layers */
+  #spark{position:fixed;inset:0;z-index:59;pointer-events:none}
+  .ripple{position:absolute;width:14px;height:14px;border-radius:50%;background:rgba(233,192,106,.55);transform:translate(-50%,-50%) scale(0);animation:rip .6s ease-out forwards;pointer-events:none}
+  @keyframes rip{to{transform:translate(-50%,-50%) scale(7);opacity:0}}
   .names-eyebrow{font-family:var(--label);font-size:11px;letter-spacing:.45em;text-transform:uppercase;color:var(--gold-bright)}
   .names-big{font-family:var(--display);font-size:clamp(48px,16vw,76px);line-height:1.04;margin:12px 0;
     background:linear-gradient(110deg,#f4e3bf,#e9c06a 40%,#fff5dd 60%,#d9a94e);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:shimmer 7s linear infinite}
@@ -164,8 +169,9 @@
     background:rgba(33,7,14,.88);backdrop-filter:blur(12px);border-top:1px solid rgba(233,192,106,.28)}
   @media(min-width:560px){#quickbar{bottom:24px;width:auto;min-width:440px;gap:14px;border:1px solid rgba(233,192,106,.3);border-radius:46px;padding:12px 26px;box-shadow:0 16px 40px rgba(0,0,0,.45)}}
   #quickbar.show{display:flex}
-  .qbtn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;color:var(--gold-bright);
-    font-family:var(--label);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:6px 2px;border-radius:12px;transition:.25s}
+  .qbtn{position:relative;overflow:hidden;flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;color:var(--gold-bright);
+    font-family:var(--label);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:6px 2px;border-radius:12px;transition:transform .15s,color .25s,background .25s}
+  .qbtn:active{transform:scale(.9)}
   .qbtn:hover{color:#fff;background:rgba(233,192,106,.1)}
   .qbtn svg{width:22px;height:22px}
 
@@ -340,6 +346,7 @@
   function openEnvelope(){
     if(cover.classList.contains('opened')) return;
     cover.classList.add('opened');
+    if(window.__enableGyro) window.__enableGyro();   // gyro needs this user gesture (iOS)
     setTimeout(function(){ cover.style.display='none'; },900);
     // start the video (with sound — tap is the user gesture that unlocks audio)
     vstage.classList.add('show');
@@ -435,6 +442,48 @@
       goToPanel(b.getAttribute('data-go'));
     });
   });
+
+  /* ── LIVELINESS: parallax (mouse+gyro), sparkle trail, tap-bloom, haptics, ripples ── */
+  (function(){
+    if(reduce) return;
+    var root=document.documentElement, px=0,py=0,tx=0,ty=0;
+    (function ease(){ tx+=(px-tx)*.1; ty+=(py-ty)*.1; root.style.setProperty('--px',tx.toFixed(3)); root.style.setProperty('--py',ty.toFixed(3)); requestAnimationFrame(ease); })();
+
+    var cv=document.createElement('canvas'); cv.id='spark'; document.body.appendChild(cv);
+    var ctx=cv.getContext('2d'); function size(){ cv.width=innerWidth; cv.height=innerHeight; } size(); addEventListener('resize',size);
+    var ps=[], COLS=['#e9c06a','#ef9d10','#fff5dd','#c69749'], mv=0;
+    function add(x,y,n,spread,up){ for(var i=0;i<n;i++){ var a=Math.random()*6.283,v=Math.random()*spread; ps.push({x:x,y:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-(up||0),r:1+Math.random()*2.4,life:0,max:38+Math.random()*34,c:COLS[(Math.random()*4)|0]}); } }
+    (function loop(){ ctx.clearRect(0,0,cv.width,cv.height);
+      for(var i=ps.length-1;i>=0;i--){ var p=ps[i]; p.life++; p.x+=p.vx; p.y+=p.vy; p.vy+=.02; var a=1-p.life/p.max;
+        if(a<=0){ ps.splice(i,1); continue; } ctx.globalAlpha=a*.9; ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.283); ctx.fill(); }
+      ctx.globalAlpha=1; requestAnimationFrame(loop); })();
+
+    addEventListener('pointermove',function(e){
+      px=e.clientX/innerWidth*2-1; py=e.clientY/innerHeight*2-1;
+      if((mv++ & 3)===0) add(e.clientX,e.clientY,1,1.1,.4);     // gold dust trail (throttled)
+    },{passive:true});
+    addEventListener('pointerdown',function(e){
+      add(e.clientX,e.clientY,22,4,0);                          // tap-to-bloom burst
+      if(navigator.vibrate) navigator.vibrate(12);              // haptic
+    },{passive:true});
+
+    // ripple on quick buttons
+    quickbar.querySelectorAll('.qbtn').forEach(function(b){
+      b.addEventListener('pointerdown',function(e){ var r=document.createElement('span'); r.className='ripple';
+        var rect=b.getBoundingClientRect(); r.style.left=(e.clientX-rect.left)+'px'; r.style.top=(e.clientY-rect.top)+'px';
+        b.appendChild(r); setTimeout(function(){ r.remove(); },600); });
+    });
+
+    // gyro (mobile tilt) — enabled on the envelope tap (iOS permission)
+    window.__enableGyro=function(){
+      function h(ev){ if(ev.gamma==null) return; px=Math.max(-1,Math.min(1,ev.gamma/26)); py=Math.max(-1,Math.min(1,(ev.beta-45)/26)); }
+      try{
+        if(typeof DeviceOrientationEvent!=='undefined' && DeviceOrientationEvent.requestPermission)
+          DeviceOrientationEvent.requestPermission().then(function(s){ if(s==='granted') addEventListener('deviceorientation',h); }).catch(function(){});
+        else addEventListener('deviceorientation',h);
+      }catch(e){}
+    };
+  })();
 })();
 </script>
 </body>

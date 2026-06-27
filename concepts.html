@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShadiCards — Template Concepts & AI Asset Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Cormorant+Garamond:ital@0;1&family=Marcellus&family=Mukta:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --maroon:#7d1430;--maroon-deep:#2c0712;--paper:#fcf7ef;--gold:#c69749;--gold-bright:#e9c06a;
+    --soft:#b79a8e;--display:'Rozha One',serif;--serif:'Cormorant Garamond',serif;--label:'Marcellus',serif;--body:'Mukta',system-ui,sans-serif;
+  }
+  body{background:radial-gradient(80% 50% at 50% 0,#4d0c1d,#1c0509 60%,#140307);color:#f3e7d8;font-family:var(--body);line-height:1.6;padding-bottom:80px}
+  ::selection{background:var(--gold-bright);color:#2c0712}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  header{text-align:center;padding:70px 22px 40px}
+  header .eyebrow{font-family:var(--label);font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:14px}
+  header h1{font-family:var(--display);font-size:clamp(38px,7vw,64px);line-height:1.05;
+    background:linear-gradient(110deg,#f4e3bf,#e9c06a 45%,#fff5dd 60%,#d9a94e);-webkit-background-clip:text;background-clip:text;color:transparent}
+  header p{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--soft);margin-top:12px;max-width:680px;margin-left:auto;margin-right:auto}
+
+  .note{max-width:880px;margin:0 auto 50px;background:rgba(233,192,106,.07);border:1px solid rgba(233,192,106,.25);border-radius:16px;padding:24px 26px}
+  .note h2{font-family:var(--label);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:12px}
+  .note p{font-size:15px;color:#e7d8c8;margin-bottom:8px}
+  .note b{color:var(--gold-bright)}
+
+  .sec-head{text-align:center;margin:64px 0 30px}
+  .sec-head .k{font-family:var(--label);font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold)}
+  .sec-head h2{font-family:var(--display);font-size:clamp(30px,5vw,44px);color:var(--paper);margin-top:6px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+  .card{position:relative;background:linear-gradient(165deg,rgba(125,20,48,.32),rgba(20,4,9,.5));border:1px solid rgba(233,192,106,.22);border-radius:18px;padding:24px 22px;overflow:hidden}
+  .card .num{font-family:var(--display);font-size:46px;color:rgba(233,192,106,.22);line-height:1;position:absolute;top:14px;right:18px}
+  .card h3{font-family:var(--display);font-size:24px;color:var(--gold-bright);margin-bottom:6px;padding-right:46px}
+  .card .vibe{font-family:var(--serif);font-style:italic;font-size:17px;color:#e9d6c6;margin-bottom:12px}
+  .card .meta{font-size:13.5px;color:#cdb6a6;margin-bottom:4px}
+  .card .meta b{color:var(--gold-bright);font-weight:600}
+  .prompt{margin-top:16px;background:rgba(0,0,0,.34);border:1px dashed rgba(233,192,106,.35);border-radius:12px;padding:13px 14px;position:relative}
+  .prompt .plabel{display:flex;justify-content:space-between;align-items:center;font-family:var(--label);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .prompt code{display:block;font-family:'Mukta',monospace;font-size:13px;color:#f0e2d3;line-height:1.55;white-space:pre-wrap}
+  .copy{font-family:var(--label);font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:rgba(233,192,106,.16);color:var(--gold-bright);border:1px solid rgba(233,192,106,.4);border-radius:20px;padding:4px 11px;cursor:pointer;transition:.2s}
+  .copy:hover{background:var(--gold-bright);color:#2c0712}
+  .copy.done{background:#3fa66a;color:#fff;border-color:#3fa66a}
+
+  .toolkit{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:900px;margin:0 auto}
+  .chip{font-family:var(--body);font-size:14px;background:rgba(233,192,106,.1);border:1px solid rgba(233,192,106,.3);border-radius:30px;padding:8px 16px;color:#f0e2d3}
+  .chip b{color:var(--gold-bright)}
+
+  footer{text-align:center;margin-top:70px;font-family:var(--label);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--soft)}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">ShadiCards · Creative Playbook</div>
+  <h1>Template Concepts &amp;<br>AI Asset Library</h1>
+  <p>Every concept below = one buildable invitation “world”. Each comes with a ready-to-paste <b>Meta AI</b> prompt to generate an animated GIF/loop background you can download.</p>
+</header>
+
+<div class="wrap">
+
+  <div class="note">
+    <h2>How to generate the assets in Meta AI</h2>
+    <p>1. Open <b>Meta AI</b> (in WhatsApp, Instagram, or the Meta AI app) and type <b>“Imagine: &lt;prompt&gt;”</b>.</p>
+    <p>2. When the image appears, tap <b>Animate</b> to turn it into a short looping motion clip, then <b>download</b> it (GIF/MP4).</p>
+    <p>3. Tips: keep motion <b>subtle &amp; seamless</b>, prefer <b>dark backgrounds</b> (so gold text stays readable on top), and always add <b>“seamless loop, no text”</b>. We then layer your names/details over it in the template.</p>
+    <p><b>The engine:</b> every template = <b>Container metaphor × Art direction × Signature interaction × Motion personality</b>. Swap any dial → a new world, same underlying toolkit.</p>
+  </div>
+
+  <!-- WEDDING -->
+  <div class="sec-head"><div class="k">Part 1</div><h2>Wedding Invitation Worlds</h2></div>
+  <div class="grid" id="wed"></div>
+
+  <!-- BIRTHDAY -->
+  <div class="sec-head"><div class="k">Part 2</div><h2>Birthday Invitation Worlds</h2></div>
+  <div class="grid" id="bday"></div>
+
+  <!-- WEBSITE -->
+  <div class="sec-head"><div class="k">Part 3</div><h2>Marketing Site — Video-Background Ideas</h2></div>
+  <div class="grid" id="site"></div>
+
+  <!-- TOOLKIT -->
+  <div class="sec-head"><div class="k">Part 4</div><h2>The “Liveliness” Interaction Toolkit</h2></div>
+  <div class="toolkit" id="toolkit"></div>
+
+  <footer>ShadiCards · Made for liveliness, built to feel</footer>
+</div>
+
+<script>
+const WED=[
+  ["Lifafa — Royal Envelope","Royal North-Indian envelope that opens.","Tap wax seal → flap opens → cinematic film","CSS 3D + video","A deep maroon Indian wedding envelope with embossed gold floral patterns and a golden wax seal, soft candlelight shimmer, fine gold dust slowly drifting, seamless loop, no text"],
+  ["Pothi — Sacred Manuscript","An ancient scroll that unrolls.","Scroll unrolls parchment; gold ink draws the names","SVG draw-on + scroll-scrub","An ancient parchment scroll with elegant gold calligraphy and floral borders, warm sepia candlelight, dust motes floating, gentle motion, seamless loop, no text"],
+  ["Diya Aarti — Festival of Light","Dark, sacred, intimate temple feel.","Tap to light a diya → light spreads, reveals invite","Canvas glow + reveal mask","A row of brass diya oil lamps with softly flickering golden flames in darkness, warm amber glow on marigold petals, gentle smoke, seamless loop, no text"],
+  ["Mandala Bloom","Meditative, geometric, hypnotic.","Mandala assembles petal-by-petal as you scroll","SVG/Canvas scroll-scrub","An intricate golden mandala slowly rotating and pulsing with light on a deep red background, radiating gold particles, hypnotic, seamless loop, no text"],
+  ["Rajwada — Palace Doors","Grand Rajasthani palace entrance.","Carved haveli doors swing open on tap","CSS 3D rotateY + parallax","Ornately carved golden Rajasthani palace doors with intricate jharokha patterns, warm flickering torchlight, drifting dust, seamless loop, no text"],
+  ["Mehndi Hands","Feminine, artistic, hand-drawn.","Names drawn like henna, stroke by stroke","SVG stroke-dashoffset","Delicate deep-red henna mehndi paisley patterns being drawn on soft ivory, intricate floral detail, gentle gold shimmer, seamless loop, no text"],
+  ["Phoolon ki Chadar","Marigold & rose, romantic.","A flower garland strings across; petals rain","Particle system + CSS","A garland of marigold and red roses with petals gently falling through warm golden light, soft dreamy bokeh, romantic, seamless loop, no text"],
+  ["Pichwai Folk Art","Living regional painting.","Layers gently breathe & parallax on tilt","Layered art + tilt parallax","A traditional Pichwai painting with lotus flowers, peacocks and gold leaf on deep teal and maroon, soft glowing shimmer, gentle motion, seamless loop, no text"],
+  ["Mughal Miniature","Jewel-toned, ornate, regal.","Gold-foil borders shimmer; tilt-depth scene","Gyroscope parallax","A Mughal miniature painting with jewel tones and ornate gold foil borders, a glowing royal garden scene, soft shimmer, seamless loop, no text"],
+  ["Ivory Modern (NRI)","Editorial, minimal, luxe.","One slow cinematic video, buttery smooth scroll","Lenis smooth-scroll","Minimal cream paper with a single elegant gold ink brushstroke, soft floating gold dust, luxurious and understated, subtle motion, seamless loop, no text"],
+  ["Rail Pass (Destination)","Travel / wedding-abroad fun.","Tear the ticket stub to enter","SVG + tear animation","A vintage train ticket and boarding pass with gold foil details on warm textured paper, a gentle light sweep across, seamless loop, no text"],
+  ["Film Reel Love Story","Nostalgic, cinematic.","A film strip of the couple scrubs as you scroll","Frame-sequence scroll","A vintage golden film strip unspooling with warm light flares and floating dust, nostalgic cinematic mood, seamless loop, no text"]
+];
+const BDAY=[
+  ["Gift Box Unwrap","Playful, all ages.","Tap to rip wrapping / lid pops → confetti","CSS 3D + confetti","A colorful wrapped gift box with a ribbon bow, confetti gently bursting around it on a soft pastel background, cheerful, seamless loop, no text"],
+  ["Balloon Release","Bright, for kids.","Tap → balloons rise; pop for surprises","Physics + tap","Bright colorful balloons floating upward with confetti on a soft pastel sky gradient, joyful and playful, gentle motion, seamless loop, no text"],
+  ["Blow the Candles","The cake moment.","Tap / blow (mic) → candles flicker out, smoke","Mic input + particles","A birthday cake with softly flickering candle flames and sparkling lights, warm festive glow, gentle motion, seamless loop, no text"],
+  ["Confetti Cannon","Teens & adults.","Pull a popper string → screen explodes","Canvas confetti","Vibrant confetti and paper streamers bursting across a bright colorful gradient, party celebration energy, looping animation, no text"],
+  ["Retro Arcade (8-bit)","Gamers & kids.","“Press Start” → pixel name reveal, chiptune","Pixel sprites + audio","Retro 8-bit pixel-art arcade scene with glowing neon pixels and a starfield, vibrant colors, looping animation, no text"],
+  ["Neon Night / Club","18th, 21st, adult.","Glowing neon name pulses to the beat","CSS glow + audio sync","Glowing neon light particles and bokeh on a dark background, pulsing pink and purple, energetic nightclub vibe, seamless loop, no text"],
+  ["Scrapbook Memories","Milestones (50th, 60th).","Flip through polaroids & ticket stubs","Page-flip + drag","A scrapbook page with polaroid photos and washi tape on warm craft paper, soft light, gentle paper flutter, seamless loop, no text"],
+  ["Year Timeline","Big milestones.","Scroll each year of photos to ‘today’","Scroll-scrub","Soft glowing golden numbers and sparkles floating on a warm celebratory gradient, nostalgic, gentle motion, seamless loop, no text"],
+  ["Surprise Countdown","Surprise parties.","A ticking ‘surprise in…’ suspense reveal","Countdown + reveal","A dark scene with a glowing wrapped surprise gift and building sparkles, suspenseful and festive, seamless loop, no text"]
+];
+const SITE=[
+  ["Hero — Video over Text","Full-bleed muted loop with headline on top.","Ken-Burns zoom + dark scrim + mix-blend text","video + mix-blend-mode","Warm golden bokeh and soft light leaks drifting slowly over a deep maroon background, luxurious cinematic mood, seamless loop, no text"],
+  ["Ink-Blend Hero","Palette-agnostic swirl that blends on any color.","Black-bg clip via mix-blend:screen","video + screen blend","Abstract flowing gold silk and crimson ink swirls on a pure black background, slow graceful elegant motion, seamless loop, for compositing, no text"],
+  ["Live Template Gallery","Cards that auto-play their signature moment.","Hover/tap → mini animation plays","autoplay previews","A grid of glowing golden invitation cards on dark maroon, soft shimmer passing across them, premium showcase feel, seamless loop, no text"],
+  ["Scroll-Telling Background","Background video changes per section.","Mehendi → Sangeet → Wedding as you scroll","scroll-linked video","A dreamy Indian wedding celebration montage of warm lights, marigolds and golden bokeh, slow cinematic motion, seamless loop, no text"]
+];
+const TOOLKIT=[
+  ["Tilt / Gyro parallax","layers follow your phone tilt → 3D depth"],
+  ["Sparkle trail","gold dust follows your finger / cursor"],
+  ["Tap-to-bloom + haptic","tap bursts gold + a physical buzz"],
+  ["Ripple buttons","gold ripple on every press"],
+  ["Scroll-scrub film","scrolling plays a cinematic clip"],
+  ["3D open","envelope / gift / doors swing open"],
+  ["Draw-on (SVG)","names drawn like henna / gold ink"],
+  ["Light reveal","tap a diya, light unveils the invite"],
+  ["Scratch reveal","scratch cards for the date"],
+  ["Petal / confetti rain","living, never-static ambiance"],
+  ["Live countdown","ticking days to the big day"],
+  ["Ambient sound + visualizer","shehnai / music that reacts"]
+];
+
+function promptCard(o,i){
+  return `<article class="card">
+    <div class="num">${String(i+1).padStart(2,'0')}</div>
+    <h3>${o[0]}</h3>
+    <p class="vibe">${o[1]}</p>
+    <p class="meta"><b>Signature:</b> ${o[2]}</p>
+    <p class="meta"><b>Tech:</b> ${o[3]}</p>
+    <div class="prompt">
+      <div class="plabel"><span>Meta AI animated GIF prompt</span><button class="copy">Copy</button></div>
+      <code>Imagine: ${o[4]}</code>
+    </div>
+  </article>`;
+}
+document.getElementById('wed').innerHTML=WED.map(promptCard).join('');
+document.getElementById('bday').innerHTML=BDAY.map(promptCard).join('');
+document.getElementById('site').innerHTML=SITE.map(promptCard).join('');
+document.getElementById('toolkit').innerHTML=TOOLKIT.map(t=>`<div class="chip"><b>${t[0]}</b> — ${t[1]}</div>`).join('');
+
+// copy-to-clipboard
+document.addEventListener('click',function(e){
+  if(!e.target.classList.contains('copy')) return;
+  var code=e.target.closest('.prompt').querySelector('code').textContent;
+  navigator.clipboard.writeText(code).then(function(){
+    e.target.textContent='Copied ✓'; e.target.classList.add('done');
+    setTimeout(function(){ e.target.textContent='Copy'; e.target.classList.remove('done'); },1400);
+  });
+});
+</script>
+</body>
+</html>
